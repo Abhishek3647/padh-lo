@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Educational Lectures Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+    select, input[type="file"] {
+      margin-top: 5px;
+      padding: 8px;
+      width: 100%;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    video {
+      width: 100%;
+      max-height: 400px;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Lecture Upload Panel</h1>
+
+  <label for="subject">Select Subject:</label>
+  <select id="subject">
+    <option value="">-- Select Subject --</option>
+    <option value="Mathematics">Mathematics</option>
+    <option value="Physics">Physics</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Biology">Biology</option>
+    <option value="Computer Science">Computer Science</option>
+  </select>
+
+  <label for="teacher">Select Teacher:</label>
+  <select id="teacher">
+    <option value="">-- Select Teacher --</option>
+    <option value="Mr. Sharma">Mr. Sharma</option>
+    <option value="Ms. Patel">Ms. Patel</option>
+    <option value="Dr. Khan">Dr. Khan</option>
+    <option value="Mrs. Thomas">Mrs. Thomas</option>
+  </select>
+
+  <label for="videoUpload">Upload Video Lecture:</label>
+  <input type="file" id="videoUpload" accept="video/*">
+
+  <label for="notesUpload">Upload Notes (PDF, DOCX):</label>
+  <input type="file" id="notesUpload" accept=".pdf,.doc,.docx">
+
+  <button onclick="uploadLecture()">Upload Lecture</button>
+
+  <h2>Uploaded Lectures</h2>
+  <table id="lectureTable">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Teacher</th>
+        <th>Video</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be added dynamically -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function uploadLecture() {
+    const subject = document.getElementById('subject').value;
+    const teacher = document.getElementById('teacher').value;
+    const videoFile = document.getElementById('videoUpload').files[0];
+    const notesFile = document.getElementById('notesUpload').files[0];
+
+    if (!subject || !teacher || !videoFile || !notesFile) {
+      alert("Please fill all fields and upload both video and notes.");
+      return;
+    }
+
+    const videoURL = URL.createObjectURL(videoFile);
+    const notesURL = URL.createObjectURL(notesFile);
+
+    const table = document.getElementById('lectureTable').getElementsByTagName('tbody')[0];
+    const row = table.insertRow();
+
+    row.insertCell(0).textContent = subject;
+    row.insertCell(1).textContent = teacher;
+
+    const videoCell = row.insertCell(2);
+    const video = document.createElement('video');
+    video.src = videoURL;
+    video.controls = true;
+    video.width = 200;
+    videoCell.appendChild(video);
+
+    const notesCell = row.insertCell(3);
+    const notesLink = document.createElement('a');
+    notesLink.href = notesURL;
+    notesLink.download = notesFile.name;
+    notesLink.textContent = "Download Notes";
+    notesCell.appendChild(notesLink);
+
+    // Reset inputs
+    document.getElementById('videoUpload').value = '';
+    document.getElementById('notesUpload').value = '';
+    document.getElementById('subject').selectedIndex = 0;
+    document.getElementById('teacher').selectedIndex = 0;
+  }
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Educational Lectures Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+    select, input[type="file"] {
+      margin-top: 5px;
+      padding: 8px;
+      width: 100%;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    video {
+      width: 100%;
+      max-height: 400px;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Lecture Upload Panel</h1>
+
+  <label for="subject">Select Subject:</label>
+  <select id="subject">
+    <option value="">-- Select Subject --</option>
+    <option value="Mathematics">Mathematics</option>
+    <option value="Physics">Physics</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Biology">Biology</option>
+    <option value="Computer Science">Computer Science</option>
+  </select>
+
+  <label for="teacher">Select Teacher:</label>
+  <select id="teacher">
+    <option value="">-- Select Teacher --</option>
+    <option value="Mr. Sharma">Mr. Sharma</option>
+    <option value="Ms. Patel">Ms. Patel</option>
+    <option value="Dr. Khan">Dr. Khan</option>
+    <option value="Mrs. Thomas">Mrs. Thomas</option>
+  </select>
+
+  <label for="videoUpload">Upload Video Lecture:</label>
+  <input type="file" id="videoUpload" accept="video/*">
+
+  <label for="notesUpload">Upload Notes (PDF, DOCX):</label>
+  <input type="file" id="notesUpload" accept=".pdf,.doc,.docx">
+
+  <button onclick="uploadLecture()">Upload Lecture</button>
+
+  <h2>Uploaded Lectures</h2>
+  <table id="lectureTable">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Teacher</th>
+        <th>Video</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be added dynamically -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function uploadLecture() {
+    const subject = document.getElementById('subject').value;
+    const teacher = document.getElementById('teacher').value;
+    const videoFile = document.getElementById('videoUpload').files[0];
+    const notesFile = document.getElementById('notesUpload').files[0];
+
+    if (!subject || !teacher || !videoFile || !notesFile) {
+      alert("Please fill all fields and upload both video and notes.");
+      return;
+    }
+
+    const videoURL = URL.createObjectURL(videoFile);
+    const notesURL = URL.createObjectURL(notesFile);
+
+    const table = document.getElementById('lectureTable').getElementsByTagName('tbody')[0];
+    const row = table.insertRow();
+
+    row.insertCell(0).textContent = subject;
+    row.insertCell(1).textContent = teacher;
+
+    const videoCell = row.insertCell(2);
+    const video = document.createElement('video');
+    video.src = videoURL;
+    video.controls = true;
+    video.width = 200;
+    videoCell.appendChild(video);
+
+    const notesCell = row.insertCell(3);
+    const notesLink = document.createElement('a');
+    notesLink.href = notesURL;
+    notesLink.download = notesFile.name;
+    notesLink.textContent = "Download Notes";
+    notesCell.appendChild(notesLink);
+
+    // Reset inputs
+    document.getElementById('videoUpload').value = '';
+    document.getElementById('notesUpload').value = '';
+    document.getElementById('subject').selectedIndex = 0;
+    document.getElementById('teacher').selectedIndex = 0;
+  }
+</script>
+
+</body>
+</html>
